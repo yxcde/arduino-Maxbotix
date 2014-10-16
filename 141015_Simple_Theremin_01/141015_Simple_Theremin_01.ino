@@ -1,7 +1,7 @@
-// written at: luckylarry.co.uk
+// written at: luckylarry.co.uk editied for MaxBotix LV-MaxSonar-EZ1
 // very easy Theremin
 
-// setup pins and variables for SRF05 sonar device
+// setup pins and variables
 int pwPin = 7;                                  // MaxSonar PW pin
 int speakerPin = 6;                             // Speaker output pin
 unsigned long pulseTime = 0;                    // stores the pulse in Micro Seconds
