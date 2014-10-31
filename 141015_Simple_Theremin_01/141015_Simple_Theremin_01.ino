@@ -16,7 +16,7 @@ void setup() {
   pinMode(pwPin, INPUT);                      // set PW pin 7 as input
   Serial.begin(9600);
 
- } 
+} 
 
 // execute
 void loop() {
@@ -26,14 +26,35 @@ void loop() {
 
   // make the sound.
   // check the distance, if over 30cm make no sound
-  if (distance < 40) {
-  digitalWrite(speakerPin, HIGH);
-  delayMicroseconds(soundDelay);
-  digitalWrite(speakerPin, LOW);
-  delayMicroseconds(soundDelay);
- }
+  if (distance < 60) {
+    tone(speakerPin, pulseTime);
+    int cm = distance;
+    sendBinaryInt(cm);
 
+  }
+
+/*
+  Serial.print(pulseTime);
+  Serial.print(" ");
+  Serial.print("Hz");
+  Serial.print(" ");
+  Serial.print("|");
+  Serial.print(" ");
   Serial.print(distance);
   Serial.print(" ");
   Serial.println("cm");
+  */
+}
+
+void sendBinaryInt(int data){
+  Serial.write(lowByte(data));
+  Serial.write(highByte(data));
+
+}
+
+void sendBinaryLong(long value){
+  int temp = value & 0xFFFF;
+  sendBinaryInt(temp);
+  temp = value >> 16;
+  sendBinaryInt(temp);
 }
